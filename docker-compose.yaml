@@ -1,0 +1,22 @@
+services:
+  app:
+    build: .
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./data:/usr/src/app/data
+      - ./src:/usr/src/app
+    tty: true
+    # command: nvidia-smi
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+
+
+# volumes:
+#   data:
+#   src:
