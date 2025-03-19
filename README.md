@@ -100,5 +100,6 @@ Incomplete:
 - Different decoding algorithms to prevent over-confidence or adjust randomness (Nucleus Sampling, Contrastive Decoding)
 - RL approaches such as RLHF and more 
 - RAG to expand topic contexts
-- LoRa to more efficient fine-tuning
+- LoRA + Adapters to more efficient fine-tuning without overfit
 - Human in the loop 
+## QA
