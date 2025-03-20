@@ -103,3 +103,24 @@ Incomplete:
 - LoRA + Adapters to more efficient fine-tuning without overfit
 - Human in the loop 
 ## QA
+* - Q: How can the chosen NLP model architecture and training process be adjusted to minimize the probability of hallucinations?
+  - A: Embedding similarity loss. Contrastive or Triplet loss for better embeddings and classification. LoRA for more stability. RL and KL Divergence. RAG.
+  - Additional Resources: https://github.com/EdinburghNLP/awesome-hallucination-detection
+* - Q: Describe the integration of the updated architecture and parameters into the existing model training functionality.
+  - A: Modify training loop for custom loss calculations. Use peft lib for LoRA and other fine tuning algorithms. Quantify and prune the model for inference.
+  - Additional Resources: https://huggingface.co/docs/peft/package_reference/lora
+* - Q: How will you set up the system to monitor and track the occurrence of hallucinations? Describe the main mechanism, components, and the way of integration.
+  - A: Embeddings similarity (BertScore, Cosine similarity). Model based hallucination detection methods (using llm). Detect new named entities. Human evaluation. Low confidence generations. Metrics such as ROUGE and BLEU are performing badly because of significant text transformation. Integrate into evaluation loop and log into tensorboard. Some metrics are very expensive to compute, so it does not make sense to compute it each epoche on the small dataset like this.
+* - Assume you have completed the training using the provided code and monitored the process. Using the plot as a reference, brainstorm and answer the following questions.
+  ![image](https://github.com/user-attachments/assets/5a768c00-e176-403c-8066-474db2889aad)
+* - Q: Which problems with the training can you highlight according to the presented losses?
+  - A: The more likely overfit is present. The presence of the overfit can be spotted on epoch 3-5. But on the epoch 50 it's clearly that the learning rate is so high so model is jumped far over local optima. Also, seems like the model can't generalize validation set at all, but anyway it can be due to high learning rate.
+* - Q: What can be changed in the training process to tackle highlighted issues?
+  - A: Lower learning rate first of all. Try to freeze weights or use advanced techniques like LoRA. Try additional intrinsic losses or regularization.
+* - Q: How can you explain the unexpected fluctuation in the training loss around epoch 50?
+  - A: Learning rate is too high
+* - Q: How can you explain the different ranges of the training/validation losses?
+  - A: Bad generalization and overfit.
+* - Q: How can we minimize the probability of the presented situation from the very beginning?
+  - A: Try lower learning rate, freeze weights while fine-tuning. Check out if dataset is prepared properly.
+ 
