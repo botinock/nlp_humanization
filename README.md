@@ -114,13 +114,13 @@ Incomplete:
 * - Assume you have completed the training using the provided code and monitored the process. Using the plot as a reference, brainstorm and answer the following questions.
   ![image](https://github.com/user-attachments/assets/5a768c00-e176-403c-8066-474db2889aad)
 * - Q: Which problems with the training can you highlight according to the presented losses?
-  - A: The more likely overfit is present. The presence of the overfit can be spotted on epoch 3-5. But on the epoch 50 it's clearly that the learning rate is so high so model is jumped far over local optima. Also, seems like the model can't generalize validation set at all, but anyway it can be due to high learning rate.
+  - A: The more likely overfit is present. The presence of the overfit can be spotted on epoch 3-5. But on the epoch 50 it's clearly that the learning rate is so high so model is jumped far over local optima (exploding gradients). Also, seems like the model can't generalize validation set at all, but anyway it can be due to high learning rate.
 * - Q: What can be changed in the training process to tackle highlighted issues?
-  - A: Lower learning rate first of all. Try to freeze weights or use advanced techniques like LoRA. Try additional intrinsic losses or regularization.
+  - A: Lower learning rate first of all. Try to freeze weights or use advanced techniques like LoRA. Try additional intrinsic losses or regularization. Also gradient clipping can help.
 * - Q: How can you explain the unexpected fluctuation in the training loss around epoch 50?
   - A: Learning rate is too high
 * - Q: How can you explain the different ranges of the training/validation losses?
-  - A: Bad generalization and overfit.
+  - A: Bad generalization and overfit. Different distributions on train and val dataset - reshuffling might help.
 * - Q: How can we minimize the probability of the presented situation from the very beginning?
   - A: Try lower learning rate, freeze weights while fine-tuning. Check out if dataset is prepared properly.
  
